@@ -306,8 +306,8 @@ export default PostDetails;
 **Appels API asynchrones** :
 -Gérer les erreurs lors de la récupération des données depuis l'API.
 -S'assurer que l'appel API est annulé si le composant est démonté avant la fin de la requête.
-fin =============================================
-## Aperçu Liste 
+
+# Aperçu Liste 
 
 
 ![Aperçu de l'application](src/application-images/image_1.png)
@@ -319,7 +319,7 @@ fin =============================================
 - **Liste des posts** : Affiche les posts avec leurs titres, contenus et tags associés.
 
 
-## Aperçu Details
+# Aperçu Details
 
 
 ![Aperçu de l'application](src/application-images/image_2.png)
