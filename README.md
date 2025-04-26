@@ -294,4 +294,4 @@ Ajouter des fonctionnalités de chargement et détail.
 
 ## Conclusion
 
-Ce TP m'a permis de mieux comprendre et maîtriser les hooks React, ainsi que de créer des hooks personnalisés pour optimiser les performances et améliorer l'expérience utilisateur. J'ai également appris à gérer le contexte global et à implémenter des fonctionnalités avancées comme le chargement infini et le filtrage par tags.
+Ce TP m'a aidé à mieux comprendre et utiliser les hooks en React. J'ai aussi appris à créer mes propres hooks pour rendre l'application plus rapide et plus agréable à utiliser. En plus, j'ai appris à gérer des données partagées et à ajouter des fonctions avancées comme le chargement infini et le tri par tags.
