@@ -153,7 +153,159 @@ const useLocalStorage = (key, initialValue) => {
 export default useLocalStorage;
 
 ```
+## Difficultés rencontrées
 
+**Sérialisation et désérialisation** :
+Manipuler les données avec JSON.stringify et JSON.parse pour stocker et récupérer des objets complexes.
+
+# Exercice 3 : Optimisation et Context
+
+## Objectif
+Gérer le thème global et optimiser les rendus.
+## Tâches réalisées
+**1. Créer le ThemeContext** : Ce contexte permet de gérer le thème clair/sombre de manière globale.
+**2. Implémenter le composant ThemeToggle** : Ce composant permet de basculer entre les thèmes.
+**3. Utiliser useCallback et useMemo** : Ces hooks optimisent les performances en mémorisant les fonctions et les valeurs calculées.
+# Explication de la solution
+**Contexte** ThemeContext :
+ ```javascript
+import React, { createContext, useContext, useState } from 'react';
+
+const ThemeContext = createContext();
+
+export const ThemeProvider = ({ children }) => {
+  const [theme, setTheme] = useState('light');
+
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+  };
+
+  return (
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+};
+
+export const useTheme = () => {
+  return useContext(ThemeContext);
+};
+ ```
+
+ **Composant** ThemeToggle :
+  ```javascript
+import React from 'react';
+import { useTheme } from '../context/ThemeContext';
+
+const ThemeToggle = () => {
+  const { theme, toggleTheme } = useTheme();
+
+  return (
+    <button onClick={toggleTheme}>
+      Basculer vers le thème {theme === 'light' ? 'sombre' : 'clair'}
+    </button>
+  );
+};
+
+export default ThemeToggle;
+  ```
+
+
+## Difficultés rencontrées
+**Problèmes de portée** :
+Erreurs comme Cannot destructure property 'theme' of 'useTheme(...)' as it is undefined, causées par l'utilisation du ThemeToggle en dehors du ThemeProvider.
+
+
+
+# Exercice 4 : Fonctionnalités avancées
+
+## Objectif
+Ajouter des fonctionnalités de chargement et détail.
+
+## Tâches réalisées
+1. **Implémenter le chargement infini des posts** : Utilisation de useIntersectionObserver pour détecter quand l'utilisateur atteint le bas de la page.
+2. **Créer le composant PostDetails** : Ce composant affiche les détails d'un post.
+3. **Ajouter la fonctionnalité de filtrage par tags**.
+
+## Explication de la solution
+**Hook** useIntersectionObserver :
+ ```javascript
+import { useEffect, useRef, useState } from 'react';
+
+const useIntersectionObserver = (callback) => {
+  const observer = useRef();
+  const [node, setNode] = useState(null);
+
+  useEffect(() => {
+    if (observer.current) observer.current.disconnect();
+
+    observer.current = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        callback();
+      }
+    });
+
+    const { current: currentObserver } = observer;
+
+    if (node) {
+      currentObserver.observe(node);
+    }
+
+    return () => currentObserver.disconnect();
+  }, [node, callback]);
+
+  return setNode;
+};
+
+export default useIntersectionObserver;
+ ```
+
+ **Composant** PostDetails :
+  ```javascript
+ import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+
+const PostDetails = ({ postId }) => {
+  const [post, setPost] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchPostDetails = async () => {
+      try {
+        const response = await axios.get(`https://dummyjson.com/posts/${postId}`);
+        setPost(response.data);
+        setLoading(false);
+      } catch (err) {
+        setError(err);
+        setLoading(false);
+      }
+    };
+
+    fetchPostDetails();
+  }, [postId]);
+
+  if (loading) return <p>Chargement...</p>;
+  if (error) return <p>Erreur : {error.message}</p>;
+
+  return (
+    <div>
+      <h2>{post.title}</h2>
+      <p>{post.body}</p>
+      <p>Tags: {post.tags.join(', ')}</p>
+    </div>
+  );
+};
+
+export default PostDetails;
+  ```
+
+ ## Difficultés rencontrées
+**Callback non déclenché**:Problèmes liés à la configuration de l'observateur, comme un seuil incorrect ou un mauvais élément observé.
+ 
+**Appels API asynchrones** :
+-Gérer les erreurs lors de la récupération des données depuis l'API.
+-S'assurer que l'appel API est annulé si le composant est démonté avant la fin de la requête.
 fin =============================================
 ## Aperçu Liste 
 
@@ -196,3 +348,8 @@ fin =============================================
 - **Gestion de l'état** :
   - Problèmes de filtrage des posts par tags et requêtes de recherche.
  
+
+
+# Conclusion
+
+Ce TP m'a aidé à mieux comprendre et utiliser les hooks en React. J'ai aussi appris à créer mes propres hooks pour rendre l'application plus rapide et plus agréable à utiliser. En plus, j'ai appris à gérer des données partagées et à ajouter des fonctions avancées comme le chargement infini et le tri par tags.
