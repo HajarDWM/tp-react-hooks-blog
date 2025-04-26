@@ -47,6 +47,12 @@ Implémenter l'affichage et la recherche de posts.
   </span>
   <span></span><span class="token">export</span><span> </span><span class="token">default</span><span> usePosts</span><span class="token">;</span></code></div></div></pre>
 * **Composant `PostList`** :
+
+
+
+
+
+
   <pre><div class="relative rounded-md border border-default bg-[#1e1e1e] dark:bg-subtle"><div class="sticky top-0 mb-1 flex items-center justify-end gap-1 rounded-t-md bg-[#1e1e1e] px-2 font-sans dark:bg-subtle"><button class="disabled:pointer-auto focus-visible:outline-hidden items-center justify-center whitespace-nowrap rounded-md font-normal transition-colors disabled:opacity-50 [&_svg]:size-4 [&_svg]:shrink-0 disabled:text-hint flex h-auto gap-1.5 px-1 py-2 text-xs text-inverted-muted hover:bg-none! hover:text-inverted-subtle dark:text-subtle dark:hover:text-muted" type="button" aria-label="Copy code to clipboard"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-copy size-6 shrink-0"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg>Copy</button></div><div node="[object Object]" class="rounded-b-md select-text dark:bg-subtle!"><code class="language-javascript"><span class="token">import</span><span> </span><span class="token">React</span><span class="token">,</span><span class="token"> </span><span class="token">{</span><span class="token"> useState </span><span class="token">}</span><span> </span><span class="token">from</span><span> </span><span class="token">'react'</span><span class="token">;</span><span>
   </span><span></span><span class="token">import</span><span> </span><span class="token">usePosts</span><span> </span><span class="token">from</span><span> </span><span class="token">'../hooks/usePosts'</span><span class="token">;</span><span>
   </span><span></span><span class="token">import</span><span> </span><span class="token">PostSearch</span><span> </span><span class="token">from</span><span> </span><span class="token">'./PostSearch'</span><span class="token">;</span><span>
@@ -80,6 +86,26 @@ Implémenter l'affichage et la recherche de posts.
   </span><span></span><span class="token">}</span><span class="token">;</span><span>
   </span>
   <span></span><span class="token">export</span><span> </span><span class="token">default</span><span> </span><span class="token">PostList</span><span class="token">;</span></code></div></div></pre>
+
+composant `PostSearch` :
+
+**import** **React**,** **{** useState **} **from** **'react'**;**
+
+**const** **PostSearch** **=** **(**{ onSearch **}**) **=>** **{**
+
+const** **[**query**,** setQuery] **=** **useState**(**''**)**;**
+
+**const** **handleSearch** **=** **(**e**)** **=>** **{**
+
+**setQuery**(e**.**target**.**value**)**;     **onSearch**(e**.**target**.**value**)**;   **}**;    ****
+
+**return** **(**     **<**input       type**=**"text"       value**=**{query**}**       onChange**=**{handleSearch**}     placeholder**=**"Rechercher des posts..."     **/**>
+
+**)**;
+
+**}**;
+
+export** **default** **PostSearch**;
 
 ### Difficultés rencontrées
 
