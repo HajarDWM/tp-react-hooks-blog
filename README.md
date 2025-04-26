@@ -308,11 +308,11 @@ export default PostDetails;
 -S'assurer que l'appel API est annulé si le composant est démonté avant la fin de la requête.
 
 # Aperçu Liste 
-
+### Première image : Page de recherche des posts
 
 ![Aperçu de l'application](src/application-images/image_1.png)
 
-### Première image : Page de recherche des posts
+
 
 - **Barre de recherche** : Permet de filtrer les posts par titre ou contenu.
 - **Boutons de filtrage par tags** : Permettent de filtrer les posts par catégories (ex. : history, american, crime).
@@ -320,7 +320,7 @@ export default PostDetails;
 
 
 # Aperçu Details
-
+### deuxième image : Page de recherche des posts
 
 ![Aperçu de l'application](src/application-images/image_2.png)
 
@@ -330,23 +330,7 @@ export default PostDetails;
 - **Tags** : Affiche les catégories associées au post (ex. : history, american, crime).
 - **URL** : Montre l'URL dynamique pour les détails du post (ex. : `localhost:3000/posts/1`).
 
-## Difficultés rencontrées
 
-- **React Router** :
-  - Installation manquante de `react-router-dom`.
-  - Oubli d'importer `useParams` dans `App.js`.
-
-- **Contexte (Context)** :
-  - `ThemeContext` mal configuré ou non englobé autour de l'application.
-
-- **Intégration API** :
-  - Erreurs lors de la récupération des données depuis l'API.
-
-- **Routage dynamique** :
-  - Difficulté à configurer des routes dynamiques pour `PostDetails`.
-
-- **Gestion de l'état** :
-  - Problèmes de filtrage des posts par tags et requêtes de recherche.
  
 
 
