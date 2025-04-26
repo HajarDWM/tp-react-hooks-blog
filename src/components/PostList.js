@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import usePosts from '../hooks/usePosts';
 import PostSearch from './PostSearch';
 import useIntersectionObserver from '../hooks/useIntersectionObserver';
@@ -8,6 +9,8 @@ const PostList = () => {
   const [filteredPosts, setFilteredPosts] = useState(posts);
   const [page, setPage] = useState(1);
   const [selectedTag, setSelectedTag] = useState(null);
+
+  const tags = Array.from(new Set(posts.flatMap(post => post.tags)));
 
   const handleSearch = useCallback((query) => {
     let filtered = posts;
@@ -23,6 +26,11 @@ const PostList = () => {
 
   const handleTagFilter = (tag) => {
     setSelectedTag(tag);
+    if (tag) {
+      setFilteredPosts(posts.filter(post => post.tags.includes(tag)));
+    } else {
+      setFilteredPosts(posts);
+    }
   };
 
   const loadMorePosts = useCallback(() => {
@@ -44,11 +52,17 @@ const PostList = () => {
       <PostSearch onSearch={handleSearch} />
       <div>
         <button onClick={() => handleTagFilter(null)}>Tous</button>
-        {/* Ajoutez des boutons pour chaque tag ici */}
+        {tags.map(tag => (
+          <button key={tag} onClick={() => handleTagFilter(tag)}>
+            {tag}
+          </button>
+        ))}
       </div>
       {filteredPosts.map(post => (
         <div key={post.id}>
-          <h2>{post.title}</h2>
+          <h2>
+            <Link to={`/posts/${post.id}`}>{post.title}</Link>
+          </h2>
           <p>{post.body}</p>
           <p>Tags: {post.tags.join(', ')}</p>
         </div>

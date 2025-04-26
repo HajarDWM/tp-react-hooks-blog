@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const usePosts = () => {
@@ -6,10 +6,19 @@ const usePosts = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const fetchMorePosts = async (page) => {
+    try {
+      const response = await axios.get(`https://dummyjson.com/posts?limit=10&skip=${(page - 1) * 10}`);
+      setPosts((prevPosts) => [...prevPosts, ...response.data.posts]);
+    } catch (err) {
+      setError(err);
+    }
+  };
+
   useEffect(() => {
-    const fetchPosts = async () => {
+    const fetchInitialPosts = async () => {
       try {
-        const response = await axios.get('https://dummyjson.com/posts');
+        const response = await axios.get('https://dummyjson.com/posts?limit=10');
         setPosts(response.data.posts);
         setLoading(false);
       } catch (err) {
@@ -18,10 +27,10 @@ const usePosts = () => {
       }
     };
 
-    fetchPosts();
+    fetchInitialPosts();
   }, []);
 
-  return { posts, loading, error };
+  return { posts, loading, error, fetchMorePosts };
 };
 
 export default usePosts;
