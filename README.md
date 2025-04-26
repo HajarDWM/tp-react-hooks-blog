@@ -295,9 +295,3 @@ Ajouter des fonctionnalités de chargement et détail.
 ## Conclusion
 
 Ce TP m'a permis de mieux comprendre et maîtriser les hooks React, ainsi que de créer des hooks personnalisés pour optimiser les performances et améliorer l'expérience utilisateur. J'ai également appris à gérer le contexte global et à implémenter des fonctionnalités avancées comme le chargement infini et le filtrage par tags.
-
-## Ressources utiles
-
-* **Documentation de l'API** : [https://dummyjson.com/docs/posts](https://dummyjson.com/docs/posts)
-* **Documentation React Hooks** : [https://fr.reactjs.org/docs/hooks-intro.html](https://fr.reactjs.org/docs/hooks-intro.html)
-* **Guide sur les hooks personnalisés** : [https://fr.reactjs.org/docs/hooks-custom.html](https://fr.reactjs.org/docs/hooks-custom.html)
