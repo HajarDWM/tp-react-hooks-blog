@@ -320,7 +320,7 @@ export default PostDetails;
 
 
 # Aperçu Details
-### deuxième image : Page de recherche des posts
+### deuxième image : Page de détails des posts
 
 ![Aperçu de l'application](src/application-images/image_2.png)
 
