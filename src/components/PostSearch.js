@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
+import useDebounce from '../hooks/useDebounce';
 
 const PostSearch = ({ onSearch }) => {
   const [query, setQuery] = useState('');
+  const debouncedQuery = useDebounce(query, 300);
 
-  const handleSearch = (e) => {
-    setQuery(e.target.value);
-    onSearch(e.target.value);
-  };
+  useEffect(() => {
+    onSearch(debouncedQuery);
+  }, [debouncedQuery, onSearch]);
 
   return (
     <input
       type="text"
       value={query}
-      onChange={handleSearch}
+      onChange={(e) => setQuery(e.target.value)}
       placeholder="Rechercher des posts..."
     />
   );
